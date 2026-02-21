@@ -1,3 +1,9 @@
+.selected {
+    background-color: #f0f0f0;
+    border-left: 4px solid #c0392b;
+    padding: 4px 8px;
+}
+
 footer {
     background-color: #B8B8BD;
     font-size: 8 px;

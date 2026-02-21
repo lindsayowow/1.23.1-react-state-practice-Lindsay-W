@@ -22,49 +22,34 @@
 // ● Highlight the currently selected genre. 
 // ● Add a “Show All” option to display all movies. 
 
-// front page:  top of the page a blank "my movie list".  second: list of genre buttons in list format. 
-// third:  a 'show all" option to clear genre filters bottom: all movies listed in movies.js using .name each in a button format   
-// to accomplish this need to pull all of the object.names from genres.js - does this use the map function?
-//buttons have event listeners that work on click and change the screen somehow with useState ability.
-//when a genre button is clicked the screen refresh will filter the movies.js file by .genre to filter for corresponding movies.
-//if the user chooses another genre button, the screen will refilter the data by that .genre and not add any movie to the list
-//if the user chooses a movie, then the click will fire 'my movie list' at the top to be updated with the title of the movie. (movie added to the my movie array list)
-//setup:  files: genres.js - array with list of objects with property "name": "genreName"
-//movies.js - array with list of objects with movie that has property "genre": "genreName" and name: "movieName"
-//GenreList.jsx -- shell for the buttons html, maybe the function for the filter by genre? need to pull in and define "genreName"
-//Movies.jsx - maybe the function for the filter by genre lives here?  also defining the movies by object.name from movies.js
-//Header.jsx - component for header html
-//Footer.jsx -component for footer html
-//App.css -styling for App.jsx
-//index.css - global styling.
-//index.html - what displays on the browser - pulls in App.jsx
-//main.html - I think this is a helper file?
-//App.jsx - adds some structure to the html. pulls in Header.jsx, Footer.jsx, Movies.jsx and Genrelist.jsx.  maybe create the <ul> here with the movie names.
-// other components for helper functions I have not thought of yet?
 
-
-
-import Header from './components/Header'
-import Footer from './components/Footer'
+import Header from './components/Header';
+import Heading1 from './components/Heading1';
+import Heading2 from './components/Heading2';
+import Footer from './components/Footer';
 import GenreList from './components/GenreList';
 import MovieList from './components/MovieList';
 import { genres } from './mock-data/genres';
 import { movies } from './mock-data/movies';
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
 
 
 
 function App() {
-    return (
-    <>
-    <div className="container">
-    <Header />
-	<GenreList />
-	<MovieList />
-	<Footer />
-      </div>
-    </>
-  );
+	let [currentGenre,setCurrentGenre] = useState("");
+	return (
+		<>
+			<div className="container">
+				<Header />
+				<Heading1 />
+				<GenreList genres={genres} selectedGenre={currentGenre} updateCurrentGenre={setCurrentGenre}/>
+				<Heading2 selectedGenre={currentGenre}/>
+				<MovieList selectedGenre={currentGenre} movies={movies}/>
+				<Footer />
+			</div>
+		</>
+	);
 }
 
 export default App
